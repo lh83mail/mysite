@@ -24,7 +24,8 @@ menu:
 social: Social
 powered:
     first: "Blog powered by"
-    last: "| Theme"
+    last: "| Theme Base of"
+    modified: ""
 current_page: Current page
 page_name:
     categories: (Categories)

@@ -24,7 +24,8 @@ menu:
 social: 社交
 powered:
     first: 本博客由
-    last: "强力驱动 | 主题"
+    last: "强力驱动 | 主题基于"
+    modified: "修改"
 current_page: 当前位置
 page_name:
     categories: （分类目录）
