@@ -28,7 +28,7 @@ ConstraintLayout 是一种非常灵活的布局，核心思想是按照各个组
 
  *相关资源*  
  - 很多博客都有详细的用法研究，可以参考： https://www.jianshu.com/p/a8b49ff64cd3 和 https://segmentfault.com/a/1190000009565417
-- 这篇更侧重具体属性的讲解 http://blog.csdn.net/u013187628/article/details/60751812
+ - 这篇更侧重具体属性的讲解 http://blog.csdn.net/u013187628/article/details/60751812
 
 
 
