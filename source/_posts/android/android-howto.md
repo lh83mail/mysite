@@ -31,4 +31,49 @@ ConstraintLayout 是一种非常灵活的布局，核心思想是按照各个组
  - 这篇更侧重具体属性的讲解 http://blog.csdn.net/u013187628/article/details/60751812
 
 
+## 如何实现不同环境打包时使用不同变量或资源
+
+关键字： 多渠道打包，动态替换常量
+
+在gradle配置里配置 buildConfigField ， 打包时gradle会根据配置生成常量类 BuildConfig。配置示例：
+
+```,groovy
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            buildConfigField("String", "URL_API_ENDPOINT", "\"http://product.yourdomain.com\"")
+        }
+        debug {
+            signingConfig signingConfigs.debug
+            buildConfigField("String", "URL_API_ENDPOINT", "\"http://devleop.yourdomain.com\"")
+        }
+    }
+```
+使用方法
+```,java
+  public String getUrl(String uri) 
+   return BuildConfig.URL_API_ENDPOINT + uri;
+  }
+```
+
+那么，debug环境下 `BuildConfig.URL_API_ENDPOINT` 的值是`http://devleop.yourdomain.com`， 而在 release 环境下`BuildConfig.URL_API_ENDPOINT` 的值是`http://product.yourdomain.com`
+
+ *相关资源*  
+ 
+- https://www.jianshu.com/p/533240d222d3 还提供了下列配置 
+ 
+        不同环境，不同包名；
+        不同环境，修改不同的 string.xml 资源文件；
+        不同环境，修改指定的常量；
+        不同环境，修改 AndroidManifest.xml 里渠道变量；
+        不同环境，引用不同的 module。
+ - http://blog.csdn.net/droidrzy/article/details/61200115 讲解了`buildType`常见的几个配置
+ - https://www.jianshu.com/p/9df3c3b6067a 可以作为安卓gradle配置快速入门参考
+
+
+
+
+
 
