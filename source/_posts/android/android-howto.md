@@ -72,8 +72,57 @@ ConstraintLayout 是一种非常灵活的布局，核心思想是按照各个组
  - http://blog.csdn.net/droidrzy/article/details/61200115 讲解了`buildType`常见的几个配置
  - https://www.jianshu.com/p/9df3c3b6067a 可以作为安卓gradle配置快速入门参考
 
+- https://developer.android.google.cn/studio/build/build-variants.html#workBuildVariants 官方资源
 
 
 
+## 出现Performing stop of activity that is not resumed 异常
+
+在Activtity的`onCreate`方法中启动了另一个Actitvity, 同时导致前一个Activity生命周期未正确完成。例如`oncreate->onstart->onstop`.
+解决方案是使用`Handler`的分发处理消息
+
+kotlin代码
+```，kotlin
+      // 使用handler防止出现异常 Performing stop of activity that is not resumed
+      rootHandler.post {
+        this.startActivity(
+                Intent(applicationContext, LoginActivity::class.java)
+                        .setFlags(
+                                Intent.FLAG_ACTIVITY_NEW_TASK
+                                        .or(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        )
+        )
+      }
+```
+*相关资源*
+- https://www.cnblogs.com/JohnTsai/p/5259869.html   Handler讲解
+
+## 出现异常  Calling startActivity() from outside of an Activity
+
+异常消息
+
+    Caused by: android.util.AndroidRuntimeException: Calling startActivity() from outside of an Activity  context requires the FLAG_ACTIVITY_NEW_TASK flag. Is this really what you want?
+
+Context中有一个startActivity方法，Activity继承自Context，重载了startActivity方法。如果使用Activity的startActivity方法，不会有任何限制，而如果使用Context的startActivity方法的话，就需要开启一个新的task，遇到上面那个异常的，都是因为使用了Context的startActivity方法。解决办法是，加一个flag `Intent.FLAG_ACTIVITY_NEW_TASK`。
+
+我的场景是试图在Application中直接启动一个登录界面Activity
+```,java
+intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
+```
+
+## 如何实现清空Activity栈
+
+方法1: 使用 `Intent.FLAG_ACTIVITY_NEW_TASK` 和 `Intent.FLAG_ACTIVITY_CLEAR_TASK`
+
+```，kotlin
+        this.startActivity(
+                Intent(applicationContext, LoginActivity::class.java)
+                        .setFlags(
+                                Intent.FLAG_ACTIVITY_NEW_TASK
+                                        .or(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        )
+        )
+```
+更多方法参照: http://blog.csdn.net/swjtuxu/article/details/26163737
 
 
