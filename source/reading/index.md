@@ -1,3 +1,3 @@
-title: 读书
-layout: reading
+title: link
+layout: links
 ---

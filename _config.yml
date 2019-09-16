@@ -80,7 +80,7 @@ category_generator:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 #theme: landscape
-theme: raytaylorism
+theme: suka
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -93,8 +93,18 @@ feed:
     type: atom
     path: atom.xml
     limit: 30
+    
+# # for search
+# search:
+#  path: search.xml
+#  field: all
 
-# for search
-search:
-  path: search.xml
-  field: all
+suka_theme:
+  search:
+    enable: true
+    path: search.json
+    field: post # Page | Post | All. Default post
+  prism:
+    enable: false
+    line_number: true
+    theme: default
