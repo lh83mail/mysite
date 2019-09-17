@@ -2,7 +2,10 @@
 title: Linux 常用工具使用
 p: linux/linux-command
 date: 2018-03-31 09:53:14
-tags:
+tags: 
+    - Linux
+    - 工具
+mathjax: true
 ---
 
 # 快速参考
@@ -33,3 +36,14 @@ tags:
 ```,bash
     ssh -CNfR 8233:127.0.0.1:58203 root@120.79.64.181
 ```
+
+$ b = a + c  $
+
+
+$L_2Loss=\sum_{(x,y)\in D} (y - prediction(x))^2$
+
+
+$$ n! = \begin{cases}
+1 & \text{if n = 0},\\
+(n-1)! \ast n & \text{if n > 0}
+ \end{cases} $$
